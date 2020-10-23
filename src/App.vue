@@ -6,6 +6,19 @@
   </div>
 </template>
 
+<script>
+import { mapActions } from "vuex";
+export default {
+  name: "App",
+  methods: {
+    ...mapActions(["GetUsersList"])
+  },
+  mounted() {
+    this.GetUsersList();
+  }
+};
+</script>
+
 <style lang="less">
 html,
 body {
