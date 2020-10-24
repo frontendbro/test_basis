@@ -1,5 +1,9 @@
 <template>
-  <button class="btn" :style="{ backgroundColor: color, color: txtColor }">
+  <button
+    @click="onClick"
+    class="btn"
+    :style="{ backgroundColor: color, color: txtColor }"
+  >
     {{ txt }}
   </button>
 </template>
@@ -10,7 +14,11 @@ export default {
   props: {
     txt: String,
     color: String,
-    txtColor: String
+    txtColor: String,
+    onClick: {
+      type: Function,
+      required: true
+    }
   }
 };
 </script>
@@ -26,8 +34,10 @@ export default {
   text-decoration: none;
   border: none;
   border-radius: 3px;
+  outline: none;
   &:hover {
     cursor: pointer;
+    opacity: 0.9;
   }
 }
 </style>
