@@ -1,13 +1,15 @@
 <template>
   <div class="user-item-card">
     <div class="user-item-card__row">
-      <span class="user-item-card__label">Id:&nbsp;</span>{{ id }}
+      <div>
+        <span class="user-item-card__label">FullName:&nbsp;</span>{{ name }}
+      </div>
+      <span class="user-item-card__label">Id:&nbsp;{{ id }}</span>
     </div>
     <div class="user-item-card__row">
-      <span class="user-item-card__label">FullName:&nbsp;</span>{{ name }}
-    </div>
-    <div class="user-item-card__row">
-      <span class="user-item-card__label">E-mail:&nbsp;</span>{{ email }}
+      <div>
+        <span class="user-item-card__label">E-mail:&nbsp;</span>{{ email }}
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +37,11 @@ export default {
     border-color: #8f8f8f;
   }
   &__row {
-    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
   &__label {
     font-size: 14px;

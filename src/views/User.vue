@@ -242,6 +242,9 @@ h1 {
     &__input {
       cursor: pointer;
     }
+    label {
+      cursor: pointer;
+    }
   }
 }
 .tasks-list {

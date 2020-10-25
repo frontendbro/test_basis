@@ -1,18 +1,18 @@
 <template>
   <div
-    class="tasks-list-item"
+    class="tasks-item-card"
     :class="{
-      'tasks-list-item_important': important
+      'tasks-item-card_important': important
     }"
   >
     <div>
       <Status
-        class="tasks-list-item__status"
+        class="tasks-item-card__status"
         :txt="status ? 'готово' : 'в работе'"
         :color="status ? '#22C38E' : '#F38B00'"
       />
-      <div class="tasks-list-item__title">
-        <span class="tasks-list-item__label">Title:&nbsp;</span>{{ title }}
+      <div class="tasks-item-card__title">
+        <span class="tasks-item-card__label">Title:&nbsp;</span>{{ title }}
       </div>
       <MyButton
         v-if="!important"
@@ -22,7 +22,7 @@
       />
       <MyButton v-else :on-click="setImportant" color="#6c6c6c" txt="Обычное" />
     </div>
-    <div class="tasks-list-item__id">Id:&nbsp;{{ id }}</div>
+    <div class="tasks-item-card__id">Id:&nbsp;{{ id }}</div>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.tasks-list-item {
+.tasks-item-card {
   display: flex;
   width: calc(50% - 8px);
   justify-content: space-between;
@@ -83,6 +83,7 @@ export default {
   }
   &_important {
     background-color: #fde6e6;
+    border-color: #ffabab;
   }
   @media only screen and (max-width: 768px) {
     width: 100%;

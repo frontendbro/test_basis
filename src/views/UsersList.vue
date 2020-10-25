@@ -1,6 +1,6 @@
 <template>
   <div class="users">
-    <h1>Список пользователей</h1>
+    <h1 class="users__title">Список пользователей:</h1>
     <div v-if="userListLoading" class="users__loading">...Загрузка</div>
     <div class="users-list" v-else>
       <router-link
@@ -35,6 +35,9 @@ export default {
 <style lang="less">
 .users {
   padding: 16px;
+  &__title {
+    font-size: 20px;
+  }
   &-list {
     display: flex;
     flex-wrap: wrap;
