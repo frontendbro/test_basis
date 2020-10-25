@@ -69,54 +69,26 @@
       По вашему запросу ничего не найдено
     </div>
     <div v-else class="tasks-list">
-      <div
-        class="tasks-list-item"
+      <TaskItemCard
         v-for="task of tasksListFiltered"
         :key="task.id"
-        :class="{
-          'tasks-list-item_important': importantTasksList.find(
-            item => Number(item) === Number(task.id)
-          )
-        }"
-      >
-        <div :id="task.id">
-          <Status
-            class="tasks-list-item__status"
-            :txt="task.completed ? 'готово' : 'в работе'"
-            :color="task.completed ? '#22C38E' : '#F38B00'"
-          />
-          <div class="tasks-list-item__title">
-            <span class="tasks-list-item__label">Title:&nbsp;</span
-            >{{ task.title }}
-          </div>
-          <MyButton
-            v-if="
-              !importantTasksList.find(item => Number(item) === Number(task.id))
-            "
-            :on-click="setImportant"
-            color="#EB5757"
-            txt="Важное"
-          />
-          <MyButton
-            v-else
-            :on-click="setImportant"
-            color="#6c6c6c"
-            txt="Обычное"
-          />
-        </div>
-        <div class="tasks-list-item__id">Id:&nbsp;{{ task.id }}</div>
-      </div>
+        :title="task.title"
+        :id="task.id"
+        :status="task.completed"
+        :important="importantTasksList.includes(task.id)"
+        @setImportantTask="setImportant"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-import Status from "@/components/Status";
 import MyButton from "@/components/MyButton";
+import TaskItemCard from "@/components/TaskItemCard";
 export default {
   name: "User",
-  components: { MyButton, Status },
+  components: { TaskItemCard, MyButton },
   data() {
     return {
       userId: this.$route.params.id,
@@ -143,9 +115,8 @@ export default {
           return item;
         });
     },
-    setImportant(e) {
-      const id = e.target.parentNode.id;
-      if (this.importantTasksList.indexOf(id) === -1) {
+    setImportant(id) {
+      if (!this.importantTasksList.includes(id)) {
         this.importantTasksList.push(id);
       } else {
         this.importantTasksList = this.importantTasksList.filter(item => {
@@ -279,45 +250,6 @@ h1 {
   width: 50%;
   @media only screen and (max-width: 1200px) {
     width: 100%;
-  }
-  &-item {
-    display: flex;
-    width: calc(50% - 8px);
-    justify-content: space-between;
-    align-items: flex-start;
-    border-radius: 3px;
-    border: 1px solid #dbdbdb;
-    background-color: #fff;
-    padding: 16px;
-    box-sizing: border-box;
-    margin-right: 16px;
-    margin-bottom: 16px;
-    &:nth-child(2n) {
-      margin-right: 0;
-    }
-    &__id {
-      color: #808080;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-    &__title {
-      margin-bottom: 16px;
-      font-size: 18px;
-    }
-    &__label {
-      font-size: 14px;
-      color: #808080;
-    }
-    &__status {
-      margin-bottom: 8px;
-    }
-    &_important {
-      background-color: #fde6e6;
-    }
-    @media only screen and (max-width: 768px) {
-      width: 100%;
-      margin-right: 0;
-    }
   }
 }
 </style>
