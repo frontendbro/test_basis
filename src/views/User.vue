@@ -1,10 +1,23 @@
 <template>
   <div class="user">
+    <div class="user-breadcrumb">
+      <router-link class="user-breadcrumb__link" to="/">
+        ← Список пользователей
+      </router-link>
+    </div>
     <div class="user-info">
-      <div>ID:&nbsp;{{ userInfo.id }}</div>
-      <div>Name:&nbsp;{{ userInfo.name }}</div>
-      <div>E-mail:&nbsp;{{ userInfo.email }}</div>
-      <div>Phone:&nbsp;{{ userInfo.phone }}</div>
+      <div>
+        <span class="user-info__label">ID:&nbsp;</span>{{ userInfo.id }}
+      </div>
+      <div>
+        <span class="user-info__label">Name:&nbsp;</span>{{ userInfo.name }}
+      </div>
+      <div>
+        <span class="user-info__label">E-mail:&nbsp;</span>{{ userInfo.email }}
+      </div>
+      <div>
+        <span class="user-info__label">Phone:&nbsp;</span>{{ userInfo.phone }}
+      </div>
     </div>
     <div class="filter">
       <div class="filter-wrap">
@@ -34,6 +47,7 @@
           </svg>
         </div>
         <MyButton
+          class="filter__btn"
           :on-click="clearSearchTxt"
           txt="Сбросить фильтр"
           color="#6c6c6c"
@@ -50,15 +64,11 @@
         </label>
       </div>
     </div>
-
-    <!--    {{ importantTasksList }}-->
-
     <div v-if="tasksListLoading">...Загрузка</div>
     <div v-else-if="!tasksListFiltered.length">
       По вашему запросу ничего не найдено
     </div>
     <div v-else class="tasks-list">
-      <!--      TODO: вынести в компонент-->
       <div
         class="tasks-list-item"
         v-for="task of tasksListFiltered"
@@ -188,35 +198,56 @@ h1 {
 .user {
   padding: 16px;
   &-info {
-    width: 50%;
+    margin-right: 16px;
     border: 1px solid #dbdbdb;
     border-radius: 3px;
     background-color: #fff;
     padding: 16px;
     margin-bottom: 16px;
+    width: calc(50% - 32px);
+    @media only screen and (max-width: 1200px) {
+      width: calc(100% - 32px);
+    }
+    &__label {
+      font-size: 14px;
+      color: #808080;
+    }
+  }
+  &-breadcrumb {
+    margin-bottom: 16px;
+    &__link {
+      text-decoration: none;
+      font-size: 12px;
+      color: #0078d2;
+    }
   }
 }
 .filter {
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
   border: 1px solid #dbdbdb;
   border-radius: 3px;
   background-color: #fff;
-  padding: 16px;
+  padding: 16px 16px 8px 16px;
   margin-bottom: 16px;
+  width: calc(50% - 32px);
+  @media only screen and (max-width: 1200px) {
+    width: calc(100% - 32px);
+  }
   &-wrap {
     display: flex;
-    margin-bottom: 8px;
+    flex-wrap: wrap;
   }
   &-search-field {
     display: inline-flex;
     align-items: center;
     position: relative;
-    margin-right: 16px;
+    margin-right: 8px;
+    margin-bottom: 8px;
     flex-shrink: 0;
     &__input {
       border: 1px solid #6c6c6c;
-      width: 260px;
-      height: 30px;
+      height: 28px;
       outline: none;
       border-radius: 4px;
       padding: 0 40px 0 12px;
@@ -229,9 +260,14 @@ h1 {
       right: 12px;
     }
   }
+  &__btn {
+    margin-bottom: 8px;
+    margin-right: 8px;
+  }
   &-sort-field {
     display: flex;
     align-items: center;
+    margin-bottom: 8px;
     &__input {
       cursor: pointer;
     }
@@ -247,7 +283,6 @@ h1 {
   &-item {
     display: flex;
     width: calc(50% - 8px);
-    min-width: 284px;
     justify-content: space-between;
     align-items: flex-start;
     border-radius: 3px;
@@ -256,15 +291,14 @@ h1 {
     padding: 16px;
     box-sizing: border-box;
     margin-right: 16px;
-    &:not(:last-child) {
-      margin-bottom: 16px;
-    }
+    margin-bottom: 16px;
     &:nth-child(2n) {
       margin-right: 0;
     }
     &__id {
-      color: #a9a9a9;
+      color: #808080;
       font-size: 14px;
+      flex-shrink: 0;
     }
     &__title {
       margin-bottom: 16px;
@@ -272,13 +306,13 @@ h1 {
     }
     &__label {
       font-size: 14px;
-      color: #a9a9a9;
+      color: #808080;
     }
     &__status {
       margin-bottom: 8px;
     }
     &_important {
-      background-color: #ffcfcf;
+      background-color: #fde6e6;
     }
     @media only screen and (max-width: 768px) {
       width: 100%;
@@ -287,26 +321,3 @@ h1 {
   }
 }
 </style>
-<!--@media only screen and (max-width : 1200px) {-->
-
-<!--}-->
-
-<!--/* Medium Devices, Desktops */-->
-<!--@media only screen and (max-width : 992px) {-->
-
-<!--}-->
-
-<!--/* Small Devices, Tablets */-->
-<!--@media only screen and (max-width : 768px) {-->
-
-<!--}-->
-
-<!--/* Extra Small Devices, Phones */-->
-<!--@media only screen and (max-width : 480px) {-->
-
-<!--}-->
-
-<!--/* Custom, iPhone Retina */-->
-<!--@media only screen and (max-width : 320px) {-->
-
-<!--}-->

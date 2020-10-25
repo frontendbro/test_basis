@@ -25,7 +25,6 @@ export default {
 
 <style lang="less">
 .user-item-card {
-  width: 50%;
   padding: 16px;
   border-radius: 3px;
   border: 1px solid #c3c3c3;
@@ -40,7 +39,7 @@ export default {
   }
   &__label {
     font-size: 14px;
-    color: #a9a9a9;
+    color: #808080;
   }
 }
 </style>

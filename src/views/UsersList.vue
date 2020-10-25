@@ -37,10 +37,21 @@ export default {
   padding: 16px;
   &-list {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    @media only screen and (max-width: 1200px) {
+      width: 100%;
+    }
     &__item {
-      &:not(:last-child) {
-        margin-bottom: 16px;
+      width: calc(50% - 8px);
+      margin-right: 16px;
+      margin-bottom: 16px;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+        margin-right: 0;
       }
     }
   }

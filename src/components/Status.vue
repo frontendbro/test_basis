@@ -18,6 +18,7 @@ export default {
 <style lang="less" scoped>
 .status {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: baseline;
   color: #fff;
   font-size: 14px;
