@@ -28,6 +28,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   height: 30px;
   padding: 0 10px;
   text-transform: uppercase;

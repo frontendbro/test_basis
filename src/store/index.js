@@ -52,6 +52,7 @@ export default new Vuex.Store({
         .get(`https://jsonplaceholder.typicode.com/users/${payload}/todos`, {})
         .then(res => {
           commit("GET_TASKS_LIST", res.data);
+          return res.data;
         })
         .catch(e => {
           throw e;
