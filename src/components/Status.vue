@@ -1,5 +1,6 @@
 <template>
-  <div class="status" :style="{ borderColor: color, color: color }">
+  <div class="status" :style="{ color: color }">
+    <div class="status__circle" :style="{ backgroundColor: color }"></div>
     <div>{{ txt }}</div>
   </div>
 </template>
@@ -17,13 +18,14 @@ export default {
 <style lang="less" scoped>
 .status {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   color: #fff;
-  background-color: #fff;
-  border-radius: 4px;
-  border: 1px solid;
-  height: 24px;
-  padding: 0 8px;
   font-size: 14px;
+  &__circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
 }
 </style>

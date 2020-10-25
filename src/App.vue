@@ -29,7 +29,8 @@ body {
 #app {
   font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans,
     Helvetica Neue, Arial, sans-serif;
-  background-color: #efefef;
+  background-color: #fafafa;
   min-height: 100%;
+  min-width: 320px;
 }
 </style>

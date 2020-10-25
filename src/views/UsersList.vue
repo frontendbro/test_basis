@@ -40,7 +40,7 @@ export default {
     flex-direction: column;
     &__item {
       &:not(:last-child) {
-        margin-bottom: 8px;
+        margin-bottom: 16px;
       }
     }
   }

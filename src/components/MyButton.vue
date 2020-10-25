@@ -2,7 +2,7 @@
   <button
     @click="onClick"
     class="btn"
-    :style="{ backgroundColor: color, color: txtColor }"
+    :style="{ borderColor: color, color: color }"
   >
     {{ txt }}
   </button>
@@ -14,7 +14,6 @@ export default {
   props: {
     txt: String,
     color: String,
-    txtColor: String,
     onClick: {
       type: Function,
       required: true
@@ -31,14 +30,13 @@ export default {
   flex-shrink: 0;
   height: 30px;
   padding: 0 10px;
-  text-transform: uppercase;
+  background-color: #ffffff;
   text-decoration: none;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 3px;
   outline: none;
   &:hover {
     cursor: pointer;
-    opacity: 0.9;
   }
 }
 </style>
