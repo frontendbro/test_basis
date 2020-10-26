@@ -47,7 +47,6 @@ export default new Vuex.Store({
     },
     GetTasksList: ({ commit }, payload) => {
       commit("TASKS_LIST_LOADING", true);
-      console.info("payload", payload);
       return axios
         .get(`https://jsonplaceholder.typicode.com/users/${payload}/todos`, {})
         .then(res => {
