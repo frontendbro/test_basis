@@ -16,13 +16,22 @@
 
 <script>
 export default {
-  name: "UserItemCard",
+  name: 'UserItemCard',
   props: {
-    id: Number,
-    name: String,
-    email: String
-  }
-};
+    id: {
+      type: Number,
+      default: null,
+    },
+    name: {
+      type: String,
+      default: '',
+    },
+    email: {
+      type: String,
+      default: '',
+    },
+  },
+}
 </script>
 
 <style lang="less">

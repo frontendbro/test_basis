@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 export default {
-  name: "App",
-  methods: {
-    ...mapActions(["GetUsersList"])
-  },
+  name: 'App',
   mounted() {
-    this.GetUsersList();
-  }
-};
+    this.GetUsersList()
+  },
+  methods: {
+    ...mapActions(['GetUsersList']),
+  },
+}
 </script>
 
 <style lang="less">

@@ -1,8 +1,8 @@
 <template>
   <button
-    @click="onClick"
     class="btn"
     :style="{ borderColor: color, color: color }"
+    @click="onClick"
   >
     {{ txt }}
   </button>
@@ -10,16 +10,22 @@
 
 <script>
 export default {
-  name: "Button",
+  name: 'Button',
   props: {
-    txt: String,
-    color: String,
+    txt: {
+      type: String,
+      default: '',
+    },
+    color: {
+      type: String,
+      default: '',
+    },
     onClick: {
       type: Function,
-      required: true
-    }
-  }
-};
+      required: true,
+    },
+  },
+}
 </script>
 
 <style lang="less">

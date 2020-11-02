@@ -2,7 +2,7 @@
   <div
     class="tasks-item-card"
     :class="{
-      'tasks-item-card_important': important
+      'tasks-item-card_important': important,
     }"
   >
     <div>
@@ -27,26 +27,26 @@
 </template>
 
 <script>
-import MyButton from "@/components/MyButton";
-import Status from "@/components/Status";
+import MyButton from '@/components/MyButton'
+import Status from '@/components/Status'
 export default {
-  name: "TaskItemCard",
+  name: 'TaskItemCard',
   components: {
     MyButton,
-    Status
+    Status,
   },
   props: {
     id: Number,
     title: String,
     status: Boolean,
-    important: Boolean
+    important: Boolean,
   },
   methods: {
     setImportant() {
-      this.$emit("setImportantTask", this.id);
-    }
-  }
-};
+      this.$emit('setImportantTask', this.id)
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>

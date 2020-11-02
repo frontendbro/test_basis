@@ -1,65 +1,65 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import axios from 'axios'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     usersList: [],
     userListLoading: false,
     tasksList: [],
-    tasksListLoading: false
+    tasksListLoading: false,
   },
   getters: {
-    getUserById: state => id => {
-      return state.usersList.find(user => user.id === id);
-    }
+    getUserById: (state) => (id) => {
+      return state.usersList.find((user) => user.id === id)
+    },
   },
   mutations: {
     USERS_LIST_LOADING: (state, payload) => {
-      state.userListLoading = payload;
+      state.userListLoading = payload
     },
     GET_USERS_LIST: (state, payload) => {
-      state.usersList = payload;
+      state.usersList = payload
     },
     TASKS_LIST_LOADING: (state, payload) => {
-      state.tasksListLoading = payload;
+      state.tasksListLoading = payload
     },
     GET_TASKS_LIST: (state, payload) => {
-      state.tasksList = payload;
-    }
+      state.tasksList = payload
+    },
   },
   actions: {
     GetUsersList: ({ commit }) => {
-      commit("USERS_LIST_LOADING", true);
+      commit('USERS_LIST_LOADING', true)
       return axios
-        .get("https://jsonplaceholder.typicode.com/users", {})
-        .then(res => {
-          commit("GET_USERS_LIST", res.data);
+        .get('https://jsonplaceholder.typicode.com/users', {})
+        .then((res) => {
+          commit('GET_USERS_LIST', res.data)
         })
-        .catch(e => {
-          throw e;
+        .catch((e) => {
+          throw e
         })
         .finally(() => {
-          commit("USERS_LIST_LOADING", false);
-        });
+          commit('USERS_LIST_LOADING', false)
+        })
     },
     GetTasksList: ({ commit }, payload) => {
-      commit("TASKS_LIST_LOADING", true);
+      commit('TASKS_LIST_LOADING', true)
       return axios
         .get(`https://jsonplaceholder.typicode.com/users/${payload}/todos`, {})
-        .then(res => {
-          commit("GET_TASKS_LIST", res.data);
-          return res.data;
+        .then((res) => {
+          commit('GET_TASKS_LIST', res.data)
+          return res.data
         })
-        .catch(e => {
-          throw e;
+        .catch((e) => {
+          throw e
         })
         .finally(() => {
-          commit("TASKS_LIST_LOADING", false);
-        });
-    }
+          commit('TASKS_LIST_LOADING', false)
+        })
+    },
   },
-  modules: {}
-});
+  modules: {},
+})

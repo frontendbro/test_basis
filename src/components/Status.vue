@@ -7,12 +7,12 @@
 
 <script>
 export default {
-  name: "Status",
+  name: 'Status',
   props: {
     txt: String,
-    color: String
-  }
-};
+    color: String,
+  },
+}
 </script>
 
 <style lang="less" scoped>

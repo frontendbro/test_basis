@@ -24,10 +24,10 @@
         <div class="filter-search-field">
           <label>
             <input
+              v-model="searchTxt"
               class="filter-search-field__input"
               type="text"
               placeholder="Поиск..."
-              v-model="searchTxt"
             />
           </label>
           <svg
@@ -56,9 +56,9 @@
       <div class="filter-sort-field">
         <label>
           <input
+            v-model="sortTaskStatus"
             class="filter-sort-field__input"
             type="checkbox"
-            v-model="sortTaskStatus"
           />
           - сортировать по статусу
         </label>
@@ -71,9 +71,9 @@
     <div v-else class="tasks-list">
       <TaskItemCard
         v-for="task of tasksListFiltered"
+        :id="task.id"
         :key="task.id"
         :title="task.title"
-        :id="task.id"
         :status="task.completed"
         :important="importantTasksList.includes(task.id)"
         @setImportantTask="setImportant"
@@ -83,83 +83,85 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
-import MyButton from "@/components/MyButton";
-import TaskItemCard from "@/components/TaskItemCard";
+import { mapState, mapGetters, mapActions } from 'vuex'
+import MyButton from '@/components/MyButton'
+import TaskItemCard from '@/components/TaskItemCard'
 export default {
-  name: "User",
+  name: 'User',
   components: { TaskItemCard, MyButton },
   data() {
     return {
       userId: this.$route.params.id,
-      searchTxt: "",
+      searchTxt: '',
       sortTaskStatus: false,
       tasksListFiltered: [],
-      importantTasksList: []
-    };
-  },
-  methods: {
-    ...mapActions(["GetTasksList"]),
-    clearSearchTxt() {
-      this.searchTxt = "";
-    },
-    searchTaskFilter() {
-      return this.tasksList
-        .filter(item => {
-          return item.title.indexOf(this.searchTxt.toLowerCase().trim()) > -1;
-        })
-        .filter(item => {
-          if (this.sortTaskStatus) {
-            return item.completed === this.sortTaskStatus;
-          }
-          return item;
-        });
-    },
-    setImportant(id) {
-      if (!this.importantTasksList.includes(id)) {
-        this.importantTasksList.push(id);
-      } else {
-        this.importantTasksList = this.importantTasksList.filter(item => {
-          return item !== id;
-        });
-      }
+      importantTasksList: [],
     }
   },
+
   computed: {
-    ...mapState(["usersList", "tasksList", "tasksListLoading"]),
-    ...mapGetters(["getUserById"]),
+    ...mapState(['usersList', 'tasksList', 'tasksListLoading']),
+    ...mapGetters(['getUserById']),
     userInfo() {
-      return this.getUserById(Number(this.userId));
-    }
+      return this.getUserById(Number(this.userId))
+    },
   },
   watch: {
     searchTxt() {
-      this.tasksListFiltered = this.searchTaskFilter();
+      this.tasksListFiltered = this.searchTaskFilter()
     },
     sortTaskStatus() {
-      this.tasksListFiltered = this.searchTaskFilter();
+      this.tasksListFiltered = this.searchTaskFilter()
     },
     importantTasksList() {
-      const parsed = JSON.stringify(this.importantTasksList);
-      localStorage.setItem(`user-${this.userId}`, parsed);
-    }
+      const parsed = JSON.stringify(this.importantTasksList)
+      localStorage.setItem(`user-${this.userId}`, parsed)
+    },
   },
+
   mounted() {
     this.GetTasksList(this.userId).then(() => {
-      this.tasksListFiltered = this.tasksList;
-    });
+      this.tasksListFiltered = this.tasksList
+    })
 
     if (localStorage.getItem(`user-${this.userId}`)) {
       try {
         this.importantTasksList = JSON.parse(
           localStorage.getItem(`user-${this.userId}`)
-        );
+        )
       } catch (e) {
-        localStorage.removeItem(`user-${this.userId}`);
+        localStorage.removeItem(`user-${this.userId}`)
       }
     }
-  }
-};
+  },
+  methods: {
+    ...mapActions(['GetTasksList']),
+    clearSearchTxt() {
+      this.searchTxt = ''
+    },
+    searchTaskFilter() {
+      return this.tasksList
+        .filter((item) => {
+          return item.title.indexOf(this.searchTxt.toLowerCase().trim()) > -1
+        })
+        .filter((item) => {
+          if (this.sortTaskStatus) {
+            return item.completed === this.sortTaskStatus
+          }
+          return item
+        })
+    },
+    setImportant(id) {
+      if (!this.importantTasksList.includes(id)) {
+        this.importantTasksList.push(id)
+      } else {
+        this.importantTasksList = this.importantTasksList.filter((item) => {
+          return item !== id
+        })
+      }
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
